@@ -4,13 +4,14 @@ import { AuthStore } from "../../../auth/store/auth.store";
 import { Spinner } from "../../../nautilus/components/ui/Spinner";
 import { useQuery } from '@tanstack/react-query';
 import { TodayAppointment } from "../../components/TodayAppointment";
+import { Alert } from "../../../nautilus/components/ui/Alert";
 
 
 export const DashboardPage = () => {
     const { token, doctor_id } = AuthStore();
     const { data: appointments = [], isLoading } = useQuery({
-        queryKey: ['appointments', doctor_id],
-        queryFn: () => getAppointments(token!, doctor_id!),
+        queryKey: ['todayAppointments', doctor_id],
+        queryFn: () => getAppointments(doctor_id!),
         enabled: !!token && !!doctor_id,
         staleTime: 1000 * 60 * 1,
         select: (allAppointments) => {
@@ -24,7 +25,7 @@ export const DashboardPage = () => {
     return <div className="flex flex-col gap-8">
         <h1 className="text-2xl font-bold">Citas de hoy</h1>
         {isLoading && <Spinner />}
-        {!isLoading && appointments.length === 0 && <p>No hay citas para este dia</p>}
+        {!isLoading && appointments.length === 0 && <Alert variant="warning" message="No hay citas para hoy"/>}
         {!isLoading && appointments.length > 0 && <TodayAppointment appointments={appointments} />}
     </div>
 }

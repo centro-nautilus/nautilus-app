@@ -5,7 +5,7 @@ import { nautilusApi } from "../../api/nautilus.api";
 
 export interface AppointmentInterface {
     id: string;
-    appointment_date: Date;
+    appointment_date: string;
     appointment_status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
     address_snapshot: string;
     email_snapshot: string;
@@ -24,13 +24,9 @@ export interface Patient {
     rut: string;
 }
 
-export const getAppointments = async (token: string, doctor_id: string): Promise<AppointmentInterface[]> => {
+export const getAppointments = async (doctor_id: string): Promise<AppointmentInterface[]> => {
     try {
-        const response = await nautilusApi.get(`appointments?doctorID=${doctor_id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        const response = await nautilusApi.get(`appointments?doctorID=${doctor_id}`)
         return response.data;
     } catch (err) {
         console.log(err)

@@ -15,7 +15,7 @@ export const TodayAppointment = ({ appointments }: TodayAppointmentProps) => {
     const { mutate, isPending, variables } = useMutation({
         mutationFn: updateAppointmentStatus,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['appointments'], exact: false })
+            queryClient.invalidateQueries({ queryKey: ['todayAppointments'], exact: false })
         }
     })
     const generarLinkWaze = (address: string) => {

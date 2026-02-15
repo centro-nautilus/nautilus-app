@@ -18,7 +18,7 @@ export const DoctorLayout = () => {
         {
             icon: FiCalendar,
             label: 'Mi Agenda',
-            path: '/dashboard'
+            path: '/dashboard/agenda'
         },
         {
             icon: MdOutlineSchedule,
