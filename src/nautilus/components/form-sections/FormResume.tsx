@@ -9,12 +9,12 @@ import { FormResumeCard } from "./FormResumeCard"
 interface FormResumeProps {
     watch: UseFormWatch<AppointmentSchemaType>,
     isValid: boolean,
-    isSubmitting: boolean
+    isSubmitting: boolean,
 }
 
 
 export const FormResume = ({ watch, isValid, isSubmitting }: FormResumeProps) => {
- 
+
     const date = watch('date')
     const schedule = watch('schedule')
     const name = watch('name')
@@ -39,7 +39,7 @@ export const FormResume = ({ watch, isValid, isSubmitting }: FormResumeProps) =>
             </FormResumeCard>
             <FormResumeCard icon={MdOutlineSchedule} title="Horario">
                 <span className="text-[#697E8A] font-semibold text-[18px] md:text-2xl">
-                    {schedule || 'Selecciona un horario'}
+                    {schedule && `${schedule} hrs` || 'Selecciona un horario'}
                 </span>
             </FormResumeCard>
             <FormResumeCard icon={FiUser} title="Paciente">
@@ -50,7 +50,16 @@ export const FormResume = ({ watch, isValid, isSubmitting }: FormResumeProps) =>
                 <span className="text-[#697E8A] font-semibold text-[14px] md:text-xl">{address || ''}</span>
             </FormResumeCard>
 
-            <button className={`p-3 md:p-5 md:text-2xl bg-[#16B3DE] text-white font-semibold text-[18px] rounded-xl ${!isValid ? 'opacity-40' : 'hover:scale-101 transition-all cursor-pointer'}`} type="submit" disabled={!isValid || isSubmitting}>Confirmar cita</button>
+            <button
+                className={
+                    `p-3 md:p-5 md:text-2xl bg-[#16B3DE] text-white font-semibold text-[18px] rounded-xl 
+                    ${(!isValid || isSubmitting) ? 'opacity-40' : 'hover:scale-101 transition-all cursor-pointer'}
+                `}
+                type="submit"
+                disabled={isSubmitting}
+            >
+                Confirmar cita
+            </button>
         </div>
     </div>
 }

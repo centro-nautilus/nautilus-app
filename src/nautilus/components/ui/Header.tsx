@@ -24,20 +24,20 @@ export const Header = ({ menuIsOpen, setMenuIsOpen, setScrollTarget, sectionActi
 
     return (
         <div className="w-full fixed z-1000">
-            <div className="border-b bg-[#FAFBFC] border-b-gray-200 flex justify-between items-center p-4 md:pl-20 md:pr-20">
+            <div className="border-b bg-[#FAFBFC] border-b-gray-200 flex justify-between items-center p-4 md:px-32">
                 <img
                     src={"/images/nautilus_logo.png"}
                     alt="Nautilus Logo"
-                    className="w-52"
+                    className="w-52 cursor-pointer"
                     onClick={() => navigate('/')}
                 />
 
-                <nav className="hidden md:flex md:gap-12 items-center">
+                <nav className="hidden lg:flex md:gap-12 items-center">
                     {navRoutes.map(route => (
                         <Link
                             key={route.id}
                             to={'/'}
-                            className={`font-medium text-xl hover:text-[#16B3DE] ${sectionActive === route.id ? 'text-[#16B3DE]' : ''}`}
+                            className={`font-medium text-xl hover:text-[#03AAC8] hover:bg-gray-100 px-4 py-2 rounded-xl transition-all ${sectionActive === route.id ? 'text-[#03AAC8]' : ''}`}
                             onClick={() => {
                                 setScrollTarget("")
                                 setTimeout(() => setScrollTarget(route.id), 0)
@@ -46,19 +46,20 @@ export const Header = ({ menuIsOpen, setMenuIsOpen, setScrollTarget, sectionActi
                             {route.name}
                         </Link>
                     ))}
-
-                    <Link
-                        to={'/auth'}
-                        className="border border-[black] text-[black] hover:border-[#10ACDB] hover:text-white hover:bg-[#10ACDB] w-full font-medium p-3 flex items-center gap-2 pr-4 pl-4 rounded-md"
-                    >
-                        <RxEnter size={24} />
-                        <span className="text-xl">Iniciar Sesión</span>
-                    </Link>
                 </nav>
 
+                <Link
+                    to={'/auth'}
+                    className="hidden lg:flex border border-[#03AAC8] text-[#03AAC8] transition-all  hover:border-[#10ACDB] hover:text-white hover:bg-[#10ACDB] font-medium py-2 items-center gap-2 px-4 rounded-md"
+                >
+                    <RxEnter size={24} />
+                    <span className="text-xl">Iniciar Sesión</span>
+                </Link>
+                
+
                 {menuIsOpen
-                    ? <IoMdClose className="flex md:hidden z-999" size={28} onClick={() => setMenuIsOpen(false)} />
-                    : <AiOutlineMenu className="flex md:hidden z-999" size={28} onClick={() => setMenuIsOpen(true)} />
+                    ? <IoMdClose className="flex lg:hidden z-999" size={28} onClick={() => setMenuIsOpen(false)} />
+                    : <AiOutlineMenu className="flex lg:hidden z-999" size={28} onClick={() => setMenuIsOpen(true)} />
                 }
             </div>
 

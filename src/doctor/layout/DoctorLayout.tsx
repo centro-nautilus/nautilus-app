@@ -4,6 +4,7 @@ import { SideBar } from "../../components/ui/SideBar"
 import { AiOutlineMenu } from "react-icons/ai"
 import { useState } from "react"
 import { IoMdClose } from "react-icons/io"
+import { MdOutlineSchedule } from "react-icons/md"
 
 export const DoctorLayout = () => {
 
@@ -16,6 +17,11 @@ export const DoctorLayout = () => {
         },
         {
             icon: FiCalendar,
+            label: 'Mi Agenda',
+            path: '/dashboard/agenda'
+        },
+        {
+            icon: MdOutlineSchedule,
             label: 'Mi Horario',
             path: '/dashboard/schedule'
         }
@@ -37,7 +43,7 @@ export const DoctorLayout = () => {
                 }
             </div>
 
-            <div className="px-4 py-8 md:py-16 md:px-50">
+            <div className="px-4 py-8 md:py-16 md:px-80 bg-[#F5F8FA] h-screen">
                 <Outlet />
             </div>
         </div>

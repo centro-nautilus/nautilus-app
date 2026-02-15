@@ -11,6 +11,7 @@ import { PanelPage } from "../admin/pages/PanelPage";
 import { PublicRoutes } from "./PublicRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { SchedulePage } from "../doctor/pages/schedule/SchedulePage";
+import { AgendaPage } from "../doctor/pages/agenda/AgendaPage";
 
 export const appRoutes = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ export const appRoutes = createBrowserRouter([
             {
                 index: true,
                 element: <DashboardPage />
+            },
+            {
+                path: 'agenda',
+                element: <AgendaPage />
             },
             {
                 path: 'schedule',

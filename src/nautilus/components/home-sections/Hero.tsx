@@ -1,29 +1,41 @@
 
+import { MdOutlineDateRange } from "react-icons/md";
 import { Link } from "react-router";
 
 export const Hero = () => {
     return (
         <div className="relative">
             {/* Sección Superior */}
-            <div className="bg-linear-to-b from-[#EEF5F8] pt-8 pb-0 to-[#D1EAF1] md:pt-28 md:pb-4 ">
-                <div className="flex flex-col items-center md:text-center px-6 md:px-20">
-                    <div className="flex flex-col gap-4 mb-10 md:gap-10" data-aos="fade-up">
-                        <h1 className="text-[#172A45] text-4xl font-bold md:text-8xl lg:text-9xl max-w-7xl mx-auto leading-tight">
-                            Tu <span className="text-[#03AAC8]">bienestar auditivo</span> es nuestra prioridad
+            <div className="
+                    bg-linear-to-b from-[#EEF5F8] to-[#D1EAF1] 
+                    pt-8 pb-0 md:pt-28 md:pb-4 
+            ">
+                <div className="
+                    flex flex-col md:items-center gap-8 md:text-center md:gap-10
+                    px-6 md:px-20 
+
+                ">
+                    <div className="flex flex-col gap-4  md:gap-8" data-aos="fade-up">
+                        <h1 className="text-[#172A45] text-4xl font-bold md:text-8xl max-w-7xl mx-auto leading-tight">
+                            Tu bienestar es nuestra prioridad
                         </h1>
                         <p className="text-xl text-slate-600 font-semibold md:text-3xl max-w-6xl mx-auto leading-relaxed">
-                            En Centro Nautilus ofrecemos atención especializada en otorrinolaringología con tecnología de vanguardia.
+                            En Nautilus realizamos prestaciones de otorrinolaringología a domicilio, enfocadas en el área auditiva y vestibular
                         </p>
                     </div>
 
                     <Link
                         to={'/agendar'}
                         data-aos="fade-up"
-                        className="bg-[#03AAC8] px-10 py-4 text-white font-semibold rounded-full text-center 
-                        hover:bg-[#0bb9d8] transition-all shadow-lg hover:scale-105 w-full
-                        md:text-2xl md:w-80 md:p-6 "
+                        className="
+                        flex gap-2 items-center
+                        bg-[#03AAC8] text-white hover:bg-[#0bb9d8] md:transition-all
+                        px-8 py-3 mb-4 rounded-xl md:px-10 md:py-4 md:mb-0
+                        font-semibold text-lg md:text-xl 
+                        "
                     >
-                        Agendar Cita
+                        <MdOutlineDateRange className="size-8" />
+                        Agendar Cita a Domicilio
                     </Link>
                 </div>
             </div>
@@ -33,7 +45,7 @@ export const Hero = () => {
                 <svg
                     viewBox="0 0 1440 320"
                     preserveAspectRatio="none"
-                    className="w-full h-20 md:h-40"
+                    className="w-full h-10 md:h-62"
                 >
                     <path
                         fill="#D1EAF1"

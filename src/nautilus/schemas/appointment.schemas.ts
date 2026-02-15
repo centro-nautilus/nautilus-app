@@ -26,8 +26,6 @@ export const appointmentSchema = z.object({
     date: z
         .string()
         .min(1, "Debes seleccionar una fecha"),
-
-    doctor_id: z.string(),
     
     schedule: z
         .string()
