@@ -47,7 +47,7 @@ export const AgendaPage = () => {
 
     const queryClient = useQueryClient()
 
-    const { mutate, isPending, variables } = useMutation({
+    const { mutate } = useMutation({
         mutationFn: updateAppointmentStatus,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['appointments'], exact: false })
