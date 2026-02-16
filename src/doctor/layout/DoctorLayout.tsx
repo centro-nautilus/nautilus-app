@@ -5,6 +5,8 @@ import { AiOutlineMenu } from "react-icons/ai"
 import { useState } from "react"
 import { IoMdClose } from "react-icons/io"
 import { MdOutlineSchedule } from "react-icons/md"
+import { FaRegClipboard } from "react-icons/fa";
+
 
 export const DoctorLayout = () => {
 
@@ -19,6 +21,11 @@ export const DoctorLayout = () => {
             icon: FiCalendar,
             label: 'Mi Agenda',
             path: '/dashboard/agenda'
+        },
+        {
+            icon: FaRegClipboard,
+            label: 'Historial',
+            path: '/dashboard/history'
         },
         {
             icon: MdOutlineSchedule,
