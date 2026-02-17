@@ -9,16 +9,13 @@ export const LoginPage = () => {
 
     const { login } = AuthStore()
 
-    const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+    const handleLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement);
         const email = formData.get('email') as string;
         const password = formData.get('password') as string;
-        await login(email, password);
-
+        login(email, password);
     }
-
-
 
     return <div className="flex justify-center tp">
         <div className="bg-white p-4 pt-8 pb-8 md:p-10 flex flex-col gap-6 md:gap-8 border border-gray-100 shadow-lg rounded-xl max-w-200 self-center">

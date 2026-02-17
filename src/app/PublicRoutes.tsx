@@ -4,7 +4,6 @@ import { Navigate } from "react-router"
 
 export const PublicRoutes = ({ children }: { children: ReactNode }) => {
     const { isAuthenticated, role } = AuthStore()
-    console.log(isAuthenticated, role)
     return (
         isAuthenticated
             ? role === 'admin'
