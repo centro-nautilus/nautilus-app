@@ -8,7 +8,8 @@ import { Alert } from "../../../nautilus/components/ui/Alert";
 
 
 export const DashboardPage = () => {
-    const { token, doctor_id } = AuthStore();
+    const { token } = AuthStore();
+    const doctor_id= 'a'
     const { data: appointments = [], isLoading } = useQuery({
         queryKey: ['todayAppointments', doctor_id],
         queryFn: () => getAppointments(doctor_id!),

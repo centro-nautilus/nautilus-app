@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { getAppointments, type AppointmentInterface } from "../../actions/get-appointment-action"
-import { AuthStore } from "../../../auth/store/auth.store"
+
 import { Spinner } from "../../../nautilus/components/ui/Spinner"
 import { Alert } from "../../../nautilus/components/ui/Alert"
 import { IoMdClose } from "react-icons/io"
@@ -11,10 +11,10 @@ import { updateAppointmentStatus } from "../../actions/update-appointment-status
 export const monthName = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 export const AgendaPage = () => {
-    const { doctor_id } = AuthStore()
+    
     const { data: appointments = {}, isLoading } = useQuery({
         queryKey: ['appointments'],
-        queryFn: () => getAppointments(doctor_id!),
+        queryFn: () => getAppointments('a'),
         select: (appointments) => {
             const appointmentsNotCancelled = appointments.filter(appointment => appointment.appointment_status !== 'cancelled')
             const appointmentsByDate = appointmentsNotCancelled.reduce<Record<string, AppointmentInterface[]>>((acc, appointment) => {
