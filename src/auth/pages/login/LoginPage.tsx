@@ -1,19 +1,20 @@
 import { HiOutlineMail } from "react-icons/hi"
 import { Input } from "../../../nautilus/components/ui/Input"
 import { TbLockPassword } from "react-icons/tb";
-import { type FormEvent } from "react";
+import {  type FormEvent } from "react";
 import { AuthStore } from "../../store/auth.store";
 
 
 export const LoginPage = () => {
 
-    const { login } = AuthStore()
+    const { login, isLoading } = AuthStore()
 
     const handleLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement);
         const email = formData.get('email') as string;
         const password = formData.get('password') as string;
+        if (!email || !password) return;
         login(email, password);
     }
 
@@ -32,7 +33,17 @@ export const LoginPage = () => {
                     <label htmlFor="" className="text-lg ">Contraseña</label>
                     <Input id="password" name='password' type="password" error="" icon={TbLockPassword} placeholder="*****" />
                 </div>
-                <button type="submit" className="w-full bg-[#10ACDB] p-3 md:py-4 cursor-pointer hover:scale-105 transition-all rounded-xl text-white md:text-xl font-bold">Iniciar Sesión</button>
+                <button
+                    type="submit"
+                    disabled={isLoading}
+                    className={`
+                        w-full bg-[#10ACDB] p-3 md:py-4 cursor-pointer hover:scale-105 
+                        transition-all rounded-xl text-white md:text-xl font-bold
+                        ${isLoading && 'bg-gray-400'}
+                    `}
+                >
+                    {isLoading ? 'Iniciando Sesion...' : 'Iniciar Sesión'}
+                </button>
             </form>
         </div>
     </div>

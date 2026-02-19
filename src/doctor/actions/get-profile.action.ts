@@ -1,8 +1,8 @@
 import { nautilusApi } from "../../api/nautilus.api"
 
-export const deleteSchedule = async (id: string) => {
+export const getProfile = async () => {
     try {
-        const response = await nautilusApi.delete(`/schedules/${id}`)
+        const response = await nautilusApi.get('/auth/profile')
         return response.data
     } catch (err) {
         throw err

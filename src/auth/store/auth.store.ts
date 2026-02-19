@@ -8,7 +8,8 @@ type AuthState = {
   token: string | null
   isAuthenticated: boolean
   isLoading: boolean
-  error: string | null
+  error: string | null,
+  setToken: (token: string | null) => void
   login: (email: string, password: string) => Promise<void>
   logout: () => void
 }
@@ -21,13 +22,13 @@ export const AuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
       error: null,
-
+      setToken: (token: string | null) => {
+        set({ token, isAuthenticated: true});
+      },
       login: async (email: string, password: string) => {
         set({ isLoading: true, error: null });
         try {
-
           const data = await loginUser(email, password);
-   
           set({
             token: data.token,
             role: data.role,
@@ -44,8 +45,6 @@ export const AuthStore = create<AuthState>()(
           });
         }
       },
-      updateToken: (newToken: string) => set({ token: newToken }),
-
       logout: async () => {
         try {
           await logoutUser()
@@ -56,7 +55,7 @@ export const AuthStore = create<AuthState>()(
             role: null,
             token: null,
             isAuthenticated: false,
-            error: null
+            error: null,
           });
         }
       },

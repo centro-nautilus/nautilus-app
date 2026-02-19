@@ -2,6 +2,7 @@ import { useState } from "react"
 import type { AppointmentSchemaType } from "../schemas/appointment.schemas"
 import { registerAppointment } from "../actions/register-appointment"
 import toast from "react-hot-toast"
+import { queryClient } from "../../app/queryClient"
 
 export const useFormSubmit = (id: string) => {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -10,6 +11,9 @@ export const useFormSubmit = (id: string) => {
         try {
             setIsSubmitting(true)
             await registerAppointment(data, id)
+            queryClient.invalidateQueries({
+                queryKey: ['schedules']
+            })
             toast.success("Cita agendada!");
         } catch (error) {
             toast.error("Error al agendar");
