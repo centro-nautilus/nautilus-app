@@ -20,7 +20,7 @@ nautilusApi.interceptors.request.use(async (config) => {
     const isExpired = isTokenExpired(token)
     if (isExpired) {
       try {
-        const response = await axios.post('http://localhost:3000/auth/refresh', {}, { withCredentials: true })
+        const response = await axios.post(import.meta.env.VITE_API_URL, {}, { withCredentials: true })
         const newAccessToken = response.data.token
         setToken(newAccessToken)
         config.headers.Authorization = `Bearer ${newAccessToken}`;
