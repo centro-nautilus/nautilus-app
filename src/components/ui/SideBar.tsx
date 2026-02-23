@@ -9,7 +9,7 @@ type MenuItem = {
 }
 
 export const SideBar = ({ menuList, isMenuActivate }: { menuList: MenuItem[], isMenuActivate: boolean }) => {
-    const { logout } = AuthStore();
+    const { logout,  } = AuthStore();
 
     return (
         <aside 
@@ -27,13 +27,6 @@ export const SideBar = ({ menuList, isMenuActivate }: { menuList: MenuItem[], is
             </div>
 
             <div className="flex flex-col gap-4">
-                <div className="flex gap-4 items-center bg-[#F2F6F8] rounded-xl p-4">
-                    <span className="rounded-full w-14 h-14 bg-[#21B1C4] flex items-center justify-center text-xl text-white font-bold">NB</span>
-                    <div className="flex flex-col">
-                        <h2 className="font-semibold text-sm">Dr. Nicolas Bustamante</h2>
-                        <p className="text-gray-500 text-xs font-semibold">Otorrinolaringologo</p>
-                    </div>
-                </div>
                 <button 
                     className="p-3 text-white rounded-xl font-bold text-lg bg-[#EF4343] hover:scale-105 transition-all cursor-pointer" 
                     onClick={logout}

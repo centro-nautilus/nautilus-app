@@ -46,7 +46,7 @@ export const FormResume = ({ watch, isValid, isSubmitting }: FormResumeProps) =>
                 <span className="text-[#697E8A] font-semibold text-[18px] md:text-2xl">{name || 'Ingrese sus datos'}</span>
                 <span className="text-[#697E8A] font-semibold text-[14px] md:text-xl">{rut || ''}</span>
                 <span className="text-[#697E8A] font-semibold text-[14px] md:text-xl">{email || ''}</span>
-                <span className="text-[#697E8A] font-semibold text-[14px] md:text-xl">{phoneNumber || ''}</span>
+                <span className="text-[#697E8A] font-semibold text-[14px] md:text-xl">{phoneNumber ? `+56 9 ${phoneNumber}` : ''}</span>
                 <span className="text-[#697E8A] font-semibold text-[14px] md:text-xl">{address || ''}</span>
             </FormResumeCard>
 

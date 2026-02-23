@@ -1,18 +1,17 @@
 import { create } from 'zustand'
 import { loginUser } from '../actions/login-user.action'
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { userInfoAction } from '../actions/user-info.action';
+import { logoutUser } from '../actions/logout-user.action';
 
 type AuthState = {
   role: string | null
   token: string | null
   isAuthenticated: boolean
   isLoading: boolean
-  error: string | null
-  doctor_id: string | null
+  error: string | null,
+  setToken: (token: string | null) => void
   login: (email: string, password: string) => Promise<void>
   logout: () => void
-
 }
 
 export const AuthStore = create<AuthState>()(
@@ -23,19 +22,18 @@ export const AuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
       error: null,
-      doctor_id: null,
-
+      setToken: (token: string | null) => {
+        set({ token, isAuthenticated: true});
+      },
       login: async (email: string, password: string) => {
         set({ isLoading: true, error: null });
         try {
           const data = await loginUser(email, password);
-          const userData = await userInfoAction(data.token)
           set({
             token: data.token,
             role: data.role,
             isAuthenticated: true,
-            isLoading: false,
-            doctor_id: userData.user.id
+            isLoading: false
           });
         } catch (err) {
           set({
@@ -43,30 +41,32 @@ export const AuthStore = create<AuthState>()(
             token: null,
             isAuthenticated: false,
             isLoading: false,
-            doctor_id: null,
             error: 'Credenciales inválidas',
           });
         }
       },
-
-      logout: () => {
-        set({
-          role: null,
-          token: null,
-          isAuthenticated: false,
-          doctor_id: null
-        });
+      logout: async () => {
+        try {
+          await logoutUser()
+        } catch (error) {
+          console.error("Error al cerrar sesión en servidor", error);
+        } finally {
+          set({
+            role: null,
+            token: null,
+            isAuthenticated: false,
+            error: null,
+          });
+        }
       },
     }),
     {
-      name: 'auth-storage', // Nombre único para la key en el localStorage
-      storage: createJSONStorage(() => localStorage), // Usa localStorage por defecto
-      // Opcional: Si no quieres persistir el estado 'isLoading' o 'error'
+      name: 'auth-storage',
+      storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         token: state.token,
         role: state.role,
         isAuthenticated: state.isAuthenticated,
-        doctor_id: state.doctor_id
       }),
     }
   )

@@ -6,3 +6,4 @@ export const getDoctors = async (): Promise<Doctor[]> => {
     const response = await nautilusApi.get(`/doctors`)
     return response.data
 }
+

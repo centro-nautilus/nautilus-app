@@ -1,15 +1,15 @@
 import { RouterProvider } from "react-router"
 import { appRoutes } from "./app.routes"
 import { Toaster } from "react-hot-toast";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./queryClient";
 
 
 
 export const App = () => {
-    const queryClient = new QueryClient()
+    
     return (
         <>
-            
             <Toaster
                 position="top-right"
                 containerStyle={{

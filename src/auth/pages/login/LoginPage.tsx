@@ -1,24 +1,22 @@
 import { HiOutlineMail } from "react-icons/hi"
 import { Input } from "../../../nautilus/components/ui/Input"
 import { TbLockPassword } from "react-icons/tb";
-import { type FormEvent } from "react";
+import {  type FormEvent } from "react";
 import { AuthStore } from "../../store/auth.store";
 
 
 export const LoginPage = () => {
 
-    const { login } = AuthStore()
+    const { login, isLoading } = AuthStore()
 
-    const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+    const handleLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement);
         const email = formData.get('email') as string;
         const password = formData.get('password') as string;
-        await login(email, password);
-
+        if (!email || !password) return;
+        login(email, password);
     }
-
-
 
     return <div className="flex justify-center tp">
         <div className="bg-white p-4 pt-8 pb-8 md:p-10 flex flex-col gap-6 md:gap-8 border border-gray-100 shadow-lg rounded-xl max-w-200 self-center">
@@ -35,7 +33,17 @@ export const LoginPage = () => {
                     <label htmlFor="" className="text-lg ">Contraseña</label>
                     <Input id="password" name='password' type="password" error="" icon={TbLockPassword} placeholder="*****" />
                 </div>
-                <button type="submit" className="w-full bg-[#10ACDB] p-3 md:py-4 cursor-pointer hover:scale-105 transition-all rounded-xl text-white md:text-xl font-bold">Iniciar Sesión</button>
+                <button
+                    type="submit"
+                    disabled={isLoading}
+                    className={`
+                        w-full bg-[#10ACDB] p-3 md:py-4 cursor-pointer hover:scale-105 
+                        transition-all rounded-xl text-white md:text-xl font-bold
+                        ${isLoading && 'bg-gray-400'}
+                    `}
+                >
+                    {isLoading ? 'Iniciando Sesion...' : 'Iniciar Sesión'}
+                </button>
             </form>
         </div>
     </div>

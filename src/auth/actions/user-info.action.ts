@@ -1,13 +1,9 @@
 import { nautilusApi } from "../../api/nautilus.api";
 
-export const userInfoAction = async (token: string) => {
+export const userInfoAction = async () => {
 
     try {
-        const response = await nautilusApi.get('/auth/me', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        const response = await nautilusApi.get('/auth/profile')
         return response.data;
     } catch (err) {
         console.log(err)

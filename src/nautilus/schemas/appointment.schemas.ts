@@ -26,7 +26,7 @@ export const appointmentSchema = z.object({
     date: z
         .string()
         .min(1, "Debes seleccionar una fecha"),
-    
+
     schedule: z
         .string()
         .min(1, "Debes seleccionar un horario"),
@@ -34,13 +34,10 @@ export const appointmentSchema = z.object({
     name: z
         .string()
         .min(2, "El nombre debe tener al menos 2 caracteres")
-        .max(50, "El nombre no puede exceder 50 caracteres")
-        .regex(/^[a-zA-Z\s]+$/, "El nombre solo puede contener letras y espacios"),
+        .max(50, "El nombre no puede exceder 50 caracteres"),
 
     rut: z
         .string()
-        .min(9, "El RUT debe tener al menos 9 caracteres")
-        .max(12, "El RUT no puede exceder 12 caracteres")
         .refine(validateRUT, "RUT inválido"),
 
     email: z
@@ -50,8 +47,7 @@ export const appointmentSchema = z.object({
 
     phoneNumber: z
         .string()
-        .min(8, "El teléfono debe tener al menos 8 dígitos")
-        .max(15, "El teléfono no puede exceder 15 dígitos")
+        .length(8, "El teléfono debe tener exactamente 8 dígitos")
         .regex(/^[0-9]+$/, "El teléfono solo puede contener números"),
 
     address: z

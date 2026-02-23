@@ -12,6 +12,7 @@ import { PublicRoutes } from "./PublicRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { SchedulePage } from "../doctor/pages/schedule/SchedulePage";
 import { AgendaPage } from "../doctor/pages/agenda/AgendaPage";
+import { AppointmentHistory } from "../doctor/pages/appointment-history/AppointmentHistory";
 
 export const appRoutes = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ export const appRoutes = createBrowserRouter([
             {
                 path: 'agenda',
                 element: <AgendaPage />
+            },
+            {
+                path: 'history',
+                element: <AppointmentHistory />
             },
             {
                 path: 'schedule',
