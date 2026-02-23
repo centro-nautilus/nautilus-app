@@ -50,7 +50,7 @@ export const DoctorLayout = () => {
                 }
             </div>
 
-            <div className="px-4 py-8 md:py-16 md:px-80 bg-[#F5F8FA] h-screen">
+            <div className="flex flex-col flex-1 px-4 py-8 md:py-16 md:px-80 bg-[#F5F8FA]">
                 <Outlet />
             </div>
         </div>

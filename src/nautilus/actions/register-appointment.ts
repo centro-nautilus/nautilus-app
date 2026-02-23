@@ -13,7 +13,7 @@ export const registerAppointment = async (formData: AppointmentSchemaType, docto
             rut: formData.rut,
             comment: formData.comment
         })
-        
+
         return response.data
     } catch (err) {
         throw err

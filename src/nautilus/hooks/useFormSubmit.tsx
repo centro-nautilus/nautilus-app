@@ -16,6 +16,7 @@ export const useFormSubmit = (id: string) => {
             })
             toast.success("Cita agendada!");
         } catch (error) {
+    
             toast.error("Error al agendar");
         } finally {
             setIsSubmitting(false)

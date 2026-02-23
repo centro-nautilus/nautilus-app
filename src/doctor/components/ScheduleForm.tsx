@@ -1,11 +1,8 @@
-import { useMutation } from "@tanstack/react-query"
 import type { FormEvent } from "react"
-import { createSchedule } from "../actions/create-schedule";
-import { queryClient } from "../../app/queryClient";
-
 
 interface ScheduleFormProps {
     closeForm: () => void
+    newSchedule: (payload: { day_of_week: number, start_time: string, end_time: string }) => void
 }
 export const dayOfWeek = {
     'domingo': 0,
@@ -17,21 +14,8 @@ export const dayOfWeek = {
     'sabado': 6
 }
 export type DayKey = keyof typeof dayOfWeek;
-export const ScheduleForm = ({ closeForm }: ScheduleFormProps) => {
+export const ScheduleForm = ({ closeForm, newSchedule }: ScheduleFormProps) => {
 
-    const { mutate, isPending } = useMutation({
-        mutationFn: createSchedule,
-        onSuccess: () => {
-            // Refresca la lista de horarios automáticamente
-            queryClient.invalidateQueries({ queryKey: ['schedules'] });
-            closeForm();
-        },
-        onError: (error) => {
-            console.error("Error al crear horario:", error);
-            alert("No se pudo guardar el horario.");
-        }
-    });
-    
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
@@ -41,7 +25,8 @@ export const ScheduleForm = ({ closeForm }: ScheduleFormProps) => {
             start_time: formData.get('init_time') as string,
             end_time: formData.get('end_time') as string
         }
-        mutate(payload)
+        newSchedule(payload)
+        closeForm()
     }
 
     return <form onSubmit={handleSubmit} className="border-2 bg-white border-[#21B1C4] p-4 rounded-md flex flex-col gap-3">
@@ -54,7 +39,7 @@ export const ScheduleForm = ({ closeForm }: ScheduleFormProps) => {
                     <option value="martes">Martes</option>
                     <option value="miercoles">Miercoles</option>
                     <option value="jueves">Jueves</option>
-                    <option value="viernes">Virnes</option>
+                    <option value="viernes">Viernes</option>
                     <option value="sabado">Sabado</option>
                     <option value="domingo">Domingo</option>
                 </select>
@@ -70,8 +55,8 @@ export const ScheduleForm = ({ closeForm }: ScheduleFormProps) => {
                 </div>
             </div>
             <div className="flex justify-between gap-2 mt-1 ">
-                <button className="flex-1 py-2 bg-[#21B1C4] text-white font-semibold rounded-md" type="submit" disabled={isPending}>{isPending ? 'Agregando...' : 'Agregar'}</button>
-                <button type="button" className="flex-1 py-2 bg-[#F5F8FA] font-semibold rounded-md" onClick={() => closeForm()}>Cancelar</button>
+                <button className="flex-1 py-2 bg-[#21B1C4] text-white font-semibold rounded-md cursor-pointer" type="submit" >Agregar</button>
+                <button type="button" className="flex-1 py-2 bg-[#F5F8FA] font-semibold rounded-md cursor-pointer" onClick={() => closeForm()}>Cancelar</button>
             </div>
         </div>
     </form>
